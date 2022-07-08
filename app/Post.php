@@ -7,6 +7,11 @@ use Illuminate\Support\Str;
 
 class Post extends Model
 {
+
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
+
     public static function generateSlug($title){
         $slug = Str::slug($title, '-');
         $slug_base = $slug;
@@ -25,6 +30,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'slug',
+        'category_id',
         'content'
     ];
 }
