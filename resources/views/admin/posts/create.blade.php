@@ -18,6 +18,7 @@
                 <form id="form-create" action="{{ route('admin.posts.store') }}"
                 method="POST">
                 @csrf
+                    {{-- Title --}}
                     <div class="mb-3">
                       <label for="title" class="form-label">Titolo</label>
                       <input type="text" name="title"
@@ -29,6 +30,7 @@
                       @enderror
                        <p class="text-danger" id="error-title"></p>
                     </div>
+                    {{-- Content --}}
                     <div class="mb-3">
                       <label for="content" class="form-label">Contenuto del post</label>
                       <textarea
@@ -38,6 +40,15 @@
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
                       <p class="text-danger" id="error-content"></p>
+                    </div>
+                    {{-- Categories --}}
+                    <div class="mb-3">
+                        <select name="category_id" id="category_id">
+                            <option value="">Seleziona una categoria</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Crea</button>
                   </form>

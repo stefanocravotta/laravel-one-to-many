@@ -43,5 +43,18 @@
         @endforeach
       </table>
       {{ $posts->links() }}
+      <h2 class="text-center my-4">Lista categorie</h2>
+      @foreach ($categories as $category)
+        <div class="w-50 py-2 float-left">
+            <h4>{{ $category->name }}</h4>
+            <ul>
+                @forelse ($category->posts as $post)
+                    <li><a href="{{ route('admin.posts.show' , $post) }}">{{ $post->title }}</a></li>
+                @empty
+                    <li>Non sono presenti elementi in questa categoria</li>
+                @endforelse
+            </ul>
+        </div>
+      @endforeach
 </div>
 @endsection

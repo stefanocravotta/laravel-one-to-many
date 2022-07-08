@@ -19,6 +19,7 @@
                 method="POST">
                 @csrf
                 @method('PUT')
+                    {{-- Titolo --}}
                     <div class="mb-3">
                       <label for="title" class="form-label">Titolo</label>
                       <input type="text" name="title"
@@ -30,6 +31,7 @@
                       @enderror
                       <p class="text-danger" id="error-title"></p>
                     </div>
+                    {{-- Contenuto --}}
                     <div class="mb-3">
                       <label for="content" class="form-label">Contenuto del post</label>
                       <textarea
@@ -39,6 +41,18 @@
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
                       <p class="text-danger" id="error-content"></p>
+                    </div>
+                    {{-- Categoria --}}
+                    <div class="mb-3">
+                        <select name="category_id" id="category_id">
+                            <option value="">Seleziona una categoria</option>
+                            @foreach ($categories as $category)
+                            <option @if($category->id == old('category_id', $post->category ? $post->category->id : ''))
+                                selected
+                                @endif
+                                value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Modifica</button>
                     <a onclick="return confirm('Sei sicuro di voler annullare tutte le modifiche?')" href="{{route('admin.posts.index')}}" class="btn btn-danger"><< Torna alla pagina principale</a>
