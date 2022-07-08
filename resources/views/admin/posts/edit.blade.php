@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-8 offset-2">
                 <form id="form-edit" action="{{ route('admin.posts.update', $post) }}"
-                method="POST">
+                method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                     {{-- Titolo --}}
@@ -31,6 +31,16 @@
                       @enderror
                       <p class="text-danger" id="error-title"></p>
                     </div>
+                    {{-- Immagine --}}
+                    <div class="image mb-3">
+                        <label for="immagine" class="form-label"><h4>Aggiungi immagine</h4></label>
+                        <input type="file" class="form-control" id="immagine" name="immagine" >
+                    </div>
+                    @error('immagine')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                    <p id="error-immagine" class="text-danger"></p>
+
                     {{-- Contenuto --}}
                     <div class="mb-3">
                       <label for="content" class="form-label">Contenuto del post</label>

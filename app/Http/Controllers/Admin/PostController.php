@@ -43,6 +43,8 @@ class PostController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Post::generateSlug($data['title']);
+        $data['immagine'] = $this->imageUploader($request, $data);
+
         $new_post = new Post();
         $new_post->fill($data);
         $new_post->save();
@@ -83,6 +85,8 @@ class PostController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Post::generateSlug($data['title']);
+        $data['immagine'] = $this->imageUploader($request, $data);
+
         $post->update($data);
 
         return redirect()->route('admin.posts.show', $post);
@@ -101,5 +105,17 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.index')->with('delete_post', "Il post ' $post->title ' è stato eliminato correttamente");
 
+    }
+
+    public function imageUploader($request, $data){
+        if($request->file('immagine')){
+
+            $file = $request->file('immagine');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move( public_path('/image'), $filename);
+            $data['immagine']= $filename;
+
+            return $data['immagine'];
+        }
     }
 }

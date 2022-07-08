@@ -5,7 +5,11 @@
 @section('content')
     <div class="container d-flex justify-content-center">
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            @if ($post->immagine)
+            <img src="{{asset('image/'.$post->immagine)}}" class="card-img-top" alt="Immagine post">
+            @else
+            <img src="{{asset('image/_DSC4314-65.jpg')}}" class="card-img-top" alt="Immagine placeholder">
+            @endif
             <div class="card-body text-center">
               <h6 class="card-title">#{{ $post->id }}</h6>
               <h5 class="card-title">" {{ $post->title }} "</h5>

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-8 offset-2">
                 <form id="form-create" action="{{ route('admin.posts.store') }}"
-                method="POST">
+                method="POST" enctype="multipart/form-data">
                 @csrf
                     {{-- Title --}}
                     <div class="mb-3">
@@ -30,6 +30,14 @@
                       @enderror
                        <p class="text-danger" id="error-title"></p>
                     </div>
+                    {{-- Immagine --}}
+                    <div class="image mb-3">
+                        <label for="immagine" class="form-label"><h4>Aggiungi immagine</h4></label>
+                        <input type="file" class="form-control" id="immagine" name="immagine" accept="image/*">
+                    </div>
+                    @error('immagine')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     {{-- Content --}}
                     <div class="mb-3">
                       <label for="content" class="form-label">Contenuto del post</label>

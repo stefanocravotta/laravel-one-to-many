@@ -25,6 +25,7 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:255',
+            'immagine' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'content' => 'required|min:3',
         ];
     }
@@ -34,7 +35,7 @@ class PostRequest extends FormRequest
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve avere almeno :min caratteri',
             'title.max' => 'Il titolo deve avere massimo :max caratteri',
-            'content.required' => 'Il contenuto è obbligatorio',
+            'immagine.image' => 'Il file non è stato correttamente caricato',
             'content.min' => 'Il contenuto deve avere almeno :min caratteri'
         ];
     }

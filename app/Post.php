@@ -31,6 +31,7 @@ class Post extends Model
         'title',
         'slug',
         'content',
+        'immagine',
         'category_id'
     ];
 }
